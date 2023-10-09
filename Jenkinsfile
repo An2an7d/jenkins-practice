@@ -2,6 +2,15 @@ pipeline {
     agent { label 'AGENT-1' }
 
     stages {
+        stage('status') {
+            steps {
+                sh '''
+                    ls -ltr
+                    pwd
+                    echo "hello script"
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -15,6 +24,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                error 'this is failed'
             }
         }
     }
