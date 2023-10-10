@@ -12,7 +12,7 @@ pipeline {
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
     triggers{
-        cron('*****')
+        cron('* * * * *')
     }
     options {
         timeout(time: 1, unit: 'HOURS') 
