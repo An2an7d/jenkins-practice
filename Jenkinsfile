@@ -11,9 +11,9 @@ pipeline {
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-    triggers{
-        cron('* * * * *')
-    }
+    // triggers{
+    //     cron('* * * * *')
+    // }
     options {
         timeout(time: 1, unit: 'HOURS') 
     }
@@ -66,6 +66,27 @@ pipeline {
                 echo "Choice: ${params.CHOICE}"
 
                 echo "Password: ${params.PASSWORD}"
+            }
+        }
+        stage('input') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
+        }
+        stage('Example Deploy') {
+            when {
+                environment name: 'user', value: 'anand'
+            }
+            steps {
+                echo 'Deploying'
             }
         }
     }
