@@ -1,6 +1,11 @@
 pipeline {
     agent { label 'AGENT-1' }
-
+    options {
+        timeout(time: 1, unit: 'HOURS') 
+    }
+    environment{
+        user = 'anand'
+    }
     stages {
         stage('status') {
             steps {
@@ -8,6 +13,7 @@ pipeline {
                     ls -ltr
                     pwd
                     echo "hello from github push webhook event"
+                    printenv
                 '''
             }
         }
@@ -24,7 +30,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                error 'this is failed'
+                // error 'this is failed'
             }
         }
     }
