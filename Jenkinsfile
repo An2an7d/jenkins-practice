@@ -31,7 +31,7 @@ stages{
                 }
             }
         }
-}
+    }
      post { 
         always { 
             echo 'I will always run whether the job fails or success'
